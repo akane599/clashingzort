@@ -44,7 +44,7 @@ profile:
 dns:
   enable: true
   #listen: 127.0.0.1:53 ## Or 0.0.0.0:53 for LAN.
-  ipv6: true
+  ipv6: false
   prefer-h3: true
   default-nameserver: 
     - '127.0.0.1'
@@ -76,7 +76,6 @@ proxy-groups:
   type: select
   use:
     #- local
-    - airports
     - aggregator
 
 - name: auto
@@ -84,7 +83,6 @@ proxy-groups:
   #filter: "🏁"
   use:
     #- local
-    - airports
     - aggregator
 
 proxy-providers:
@@ -100,27 +98,15 @@ proxy-providers:
       ##url: "https://cdn.jsdelivr.net"
       ##url: "https://detectportal.firefox.com/success.txt"
 
-  airports:
-    type: http
-    url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/airport_merge_yaml.yml"
-    interval: 86400
-    path: ./providers/airports.yaml
-    health-check:
-      enable: true
-      interval: 3600
-      lazy: true
-      url: "https://cp.cloudflare.com"
-      #url: "https://cdn.jsdelivr.net"
-      #url: "https://detectportal.firefox.com/success.txt"
 
   aggregator:
     type: http
-    url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/master/sub/sub_merge_yaml.yml"
-    interval: 86400
+    url: "https://raw.githubusercontent.com/mahdibland/V2RayAggregator/refs/heads/master/update/provider/provider-all.yml"
+    interval: 3600
     path: ./providers/aggregator.yaml
     health-check:
       enable: true
-      interval: 3600
+      interval: 1800
       lazy: true
       url: "https://cp.cloudflare.com"
       #url: "https://cdn.jsdelivr.net"
