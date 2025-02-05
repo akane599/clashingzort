@@ -120,8 +120,24 @@ rule-providers:
     path: ./ruleset/applications.yaml
     interval: 604800
 
+  adblock:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/BanEasyList.yaml"
+    path: ./ruleset/adblock.yaml
+    interval: 302400
+
+  easyprivacy:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Providers/BanEasyPrivacy.yaml"
+    path: ./ruleset/easyprivacy.yaml
+    interval: 302400
+
 rules:
   - GEOSITE,category-ads-all,REJECT ## Rejects advertisements.
+  - RULE-SET,adblock,REJECT
+  - RULE-SET,easyprivacy,REJECT
   - GEOSITE,win-spy,REJECT ## Rejects MS Windows analytics and spying.
   - GEOSITE,category-games,DIRECT ## Online gaming
   - GEOIP,private,DIRECT ## Loopback and LAN IPs
